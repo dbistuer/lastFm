@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Mi primer Last fm</title>
-		<meta charset="utf-8">
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="./js/md5.min.js"></script>
-		 <script type="text/javascript" src="./js/constants.js"></script>
-
+			<title>Pagina inicial</title>
+			<meta charset="utf-8">
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script type="text/javascript" src="./js/md5.min.js"></script>
+			<script type="text/javascript" src="./js/constants.js"></script>
+			<script type="text/javascript" src="./js/principal.js"></script>
+			<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<script src="bootstrap/js/bootstrap.min.js"></script>
+			<script src="http://code.jquery.com/jquery.js" ></script>
 	</head>
 	<body>
-		<h1>The onclick Event</h1>
-
-		<p>The onclick event is used to trigger a function when an element is clicked on.</p>
-
-		<p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
-
-		<button onclick="myLoginFunction()">Click me</button>
+		<div class="container" style="background-color: #dbf0fe;">
+			<br />
+			<div class="row text-right">
+				<button type="button" class="btn btn-primary" style="margin-right: 15px;" onclick="myLoginFunction()"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</button>
+			</div>
+			<hr />
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Insereix un artista" id="nomArtista">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"onclick="cercaPerArtista()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				</span>
+			</div>
+			<p id="artist"></p>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Insereix un album" id="nomAlbum">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"onclick="cercaPerAlbum()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				</span>
+			</div>
+			<p id="albums"></p>
+		</div>
 	</body>
 </html>

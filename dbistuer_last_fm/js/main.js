@@ -57,7 +57,7 @@ function calculateApiSignatureStack()
             // Somewhere to put the result after callback.
 
             // Append some static variables
-            data.api_key = API_KEY;
+
             //data['format'] = 'json';
             data['method'] = method;
 
@@ -100,7 +100,9 @@ function calculateApiSignatureStack()
 
           //Crec que només necessitem apikey, token i secret i no necessitem params, els podem treure de sessionStorage
           //Calcula l'apiSig a partir dels valors d'abans...
-            var APIsignature = "api_key"+API_KEY+"methodauth.getSessiontoken"+params['token']+SHARED_SECRET
+          //  var APIsignature = "api_key"+API_KEY+"methodauth.getSessiontoken"+params['token']+SHARED_SECRET
+          var APIsignature = "api_key"+API_KEY+"methodauth.getSessiontoken"+capured+SHARED_SECRET
+
             var hashed_sec = md5(unescape(encodeURIComponent(APIsignature)));
             console.log("La apiSig es: " + hashed_sec);
             // Correct when calculated elsewhere.
@@ -112,39 +114,99 @@ function calculateApiSignatureStack()
 }
 
 
-function responderCodigoError()
+function responderCodigoError(x)
 {
-  /*
-    1 : This error does not exist
-    2 : Invalid service -This service does not exist
-    3 : Invalid Method - No method with that name in this package
-    4 : Authentication Failed - You do not have permissions to access the service
-    5 : Invalid format - This service doesn't exist in that format
-    6 : Invalid parameters - Your request is missing a required parameter
-    7 : Invalid resource specified
-    8 : Operation failed - Most likely the backend service failed. Please try again.
-    9 : Invalid session key - Please re-authenticate
-    10 : Invalid API key - You must be granted a valid key by last.fm
-    11 : Service Offline - This service is temporarily offline. Try again later.
-    12 : Subscribers Only - This station is only available to paid last.fm subscribers
-    13 : Invalid method signature supplied
-    14 : Unauthorized Token - This token has not been authorized
-    15 : This item is not available for streaming.
-    16 : The service is temporarily unavailable, please try again.
-    17 : Login: User requires to be logged in
-    18 : Trial Expired - This user has no free radio plays left. Subscription required.
-    19 : This error does not exist
-    20 : Not Enough Content - There is not enough content to play this station
-    21 : Not Enough Members - This group does not have enough members for radio
-    22 : Not Enough Fans - This artist does not have enough fans for for radio
-    23 : Not Enough Neighbours - There are not enough neighbours for radio
-    24 : No Peak Radio - This user is not allowed to listen to radio during peak usage
-    25 : Radio Not Found - Radio station not found
-    26 : API Key Suspended - This application is not allowed to make requests to the web services
-    27 : Deprecated - This type of request is no longer supported
-    29 : Rate Limit Exceded - Your IP has made too many requests in a short period, exceeding our API guidelines
-*/
-}/*
+    switch (x){
+        case 1:
+            console.log("1 : This error does not exist");
+            break;
+        case 2:
+            console.log("2 : Invalid service -This service does not exist");
+            break;
+        case 3:
+            console.log("3 : Invalid Method - No method with that name in this package");
+            break;
+        case 4:
+            console.log("4 : Authentication Failed - You do not have permissions to access the service");
+            break;
+        case 5:
+            console.log("5 : Invalid format - This service doesn't exist in that format");
+            break;
+        case 6:
+            console.log("6 : Invalid parameters - Your request is missing a required parameter");
+            break;
+        case 7:
+            console.log("7 : Invalid resource specified");
+            break;
+        case 8:
+            console.log("8 : Operation failed - Most likely the backend service failed. Please try again.");
+            break;
+        case 9:
+            console.log("9 : Invalid session key - Please re-authenticate");
+            break;
+        case 10:
+            console.log("10 : Invalid API key - You must be granted a valid key by last.fm");
+            break;
+        case 11:
+            console.log("11 : Service Offline - This service is temporarily offline. Try again later.");
+            break;
+        case 12:
+            console.log("12 : Subscribers Only - This station is only available to paid last.fm subscribers");
+            break;
+        case 13:
+            console.log("13 : Invalid method signature supplied");
+            break;
+        case 14:
+            console.log("14 : Unauthorized Token - This token has not been authorized");
+            break;
+        case 15:
+            console.log("15 : This item is not available for streaming.");
+            break;
+        case 16:
+            console.log("16 : The service is temporarily unavailable, please try again.");
+            break;
+        case 17:
+            console.log("17 : Login: User requires to be logged in");
+            break;
+        case 18:
+            console.log("18 : Trial Expired - This user has no free radio plays left. Subscription required.");
+            break;
+        case 19:
+            console.log("19 : This error does not exist");
+            break;
+        case 20:
+            console.log("20 : Not Enough Content - There is not enough content to play this station");
+            break;
+        case 21:
+            console.log("21 : Not Enough Members - This group does not have enough members for radio");
+            break;
+        case 22:
+            console.log("22 : Not Enough Fans - This artist does not have enough fans for for radio");
+            break;
+        case 23:
+            console.log("23 : Not Enough Neighbours - There are not enough neighbours for radio");
+            break;
+        case 24:
+            console.log("24 : No Peak Radio - This user is not allowed to listen to radio during peak usage");
+            break;
+        case 25:
+            console.log("25 : Radio Not Found - Radio station not found");
+            break;
+        case 26:
+            console.log("26 : API Key Suspended - This application is not allowed to make requests to the web services");
+            break;
+        case 27:
+            console.log("27 : Deprecated - This type of request is no longer supported");
+            break;
+        case 29:
+            console.log("29 : Rate Limit Exceded - Your IP has made too many requests in a short period, exceeding our API guidelines");
+            break;
+        default:
+            console.log("Ha sorgit un error, pero no te res a veure amb lastfm");
+            break;
+      }
+}
+/*
 Metode: https://www.last.fm/api/show/user.getInfo
 Objective: Get information about a user profile.
 Params:
