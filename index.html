@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<title>Pagina inicial</title>
+			<meta charset="utf-8">
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script type="text/javascript" src="./js/md5.min.js"></script>
+			<script type="text/javascript" src="./js/constants.js"></script>
+			<script type="text/javascript" src="./js/principal.js"></script>
+			<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<script src="bootstrap/js/bootstrap.min.js"></script>
+			<script src="http://code.jquery.com/jquery.js" ></script>
+	</head>
+	<body>
+		<div class="container" style="background-color: #dbf0fe;">
+			<br />
+			<div class="row text-right">
+				<button type="button" class="btn btn-primary" style="margin-right: 15px;" onclick="myLoginFunction()"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</button>
+			</div>
+			<hr />
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Insereix un artista" id="nomArtista">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"onclick="cercaPerArtista()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				</span>
+			</div>
+			<p id="artist"></p>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Insereix un album" id="nomAlbum">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"onclick="cercaPerAlbum()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				</span>
+			</div>
+			<p id="albums"></p>
+		</div>
+	</body>
+</html>
