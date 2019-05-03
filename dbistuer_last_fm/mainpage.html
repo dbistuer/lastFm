@@ -7,60 +7,76 @@
 		<!-- <script type="text/javascript" src="./js/constants.js"></script>-->
 			<script type="text/javascript" src="./js/md5.min.js"></script>
 			<script type="text/javascript" src="./js/main.js"></script>
+			<script type="text/javascript" src="./js/mainpage.js"></script>
+			<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<script src="bootstrap/js/bootstrap.min.js"></script>
+			<script src="http://code.jquery.com/jquery.js" ></script>
 		</head>
 	<body>
-		<h1>Im login to</h1>
-		<div id="userData">
-<!--<img src="https://lastfm-img2.akamaized.net/i/u/34s/cc637716959b4acecaa1a307e300f61f.png" />-->
-		</div>
-		<br>
-		<p>
-			Aqui teniu uns resultats del getUserInfo obtinguts a la linea 178 de main.js una crida feta per mostrar dades ( no esta a dintre de cap funció)
-		</p>
+		<div class="container" style="background-color: #dbf0fe;">
+			<br />
+			<div class="row text-right">
+				<div class="label label-primary" style="margin-right: 15px;" id="artistName"></div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-sm-12 col-md-8">
+					<div class="input-group">
+						<span class="input-group-addon">Cerca artistes similars a: </span>
+						<input type="text" class="form-control" placeholder="Insereix un artista" id="nomArtista">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button"onclick="cercaArtistaSimilar()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</span>
+					</div>
+					</div>
+					<div class="col-sm-12 col-md-4">
+						<div class="input-group">
+						<span class="input-group-addon">Cantitat de registres d'artistes similars:</span>
+						<input type="number" min=1 max=150 value=10 class="form-control" placeholder="Insereix un numero" id="noArtista">
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<div class="input-group">
+						<span class="input-group-addon">Top tags de l'artista: </span>
+						<input type="text" class="form-control" placeholder="Insereix un artista" id="nomArtistaTags">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button"onclick="topTags()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</span>
+					</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-sm-12 col-md-8">
+						<div class="input-group">
+							<span class="input-group-addon">Cerca artistes per tipus de musica: </span>
+							<input type="text" class="form-control" placeholder="ex: Dance" id="tagCerca">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"onclick="cercaArtistaPerTag()">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+							</span>
+						</div>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="input-group">
+							<span class="input-group-addon">Cantitat de registres d'artistes per tipus:</span>
+							<input type="number" min=1 max=150 value=10 class="form-control" placeholder="Insereix un numero" id="noTags">
+						</div>
+					</div>
+				</div>
 
+		<div id="userData">	</div>
 		<div id="success">
-		    <div id="artistName"></div>
+		    <!--<div class="label label-primary" id="artistName"></div>-->
 		    <div id="artistImage"></div>
 		    <div id="artistBio"></div>
 		</div>
 		<div id="error"></div>
-
-<br>
-<br>
-		<p>Notes de l'autor:<br>
-		Copyright tots els drets reservats...<br>
-		Prohibida la copia distribució o reproducció total o PARCIAL sense permís</p>
-<br>
-<br>
-		<p>Get user information; funciona de forma correcta i retorna un xml ( processa resposta)<br>
-		Get Default User information: No funciona perque veieu que sense un usuari no funciona
-		( malgrat documentacio diu que ficar usuari es opcional) <br>
-		<br>
-		Search artist: Funciona correctament, busco artistes amb nom eminem i mostro 10 primers resultats ( resposta ve en JSON) </p>
-
-	<br>
-		GetTopArtist funciona correctament: Torna en JSON els 10 primers artistes de la chart de lastfm.<br>
-								Potser és el codi més semblant i més academic per fer crides ajax com vistes a classe<br>
-<br>
-<br>
-		Tant calculateApiSig com CalculateApiSigStack mostren els resultats per consola ( sembal que no fan res, però si que fan).
-<br>
-		CalculateApiSig:( NO FUNCIONA)Es un intent de calcular la apiSig per fer autenticació, segueix les instruccions de lapi pero no accepta resultats.
-										Es un esboç i una prova.<br>
-		CalculateApiSigStack: ( SI FUNCIONA) seguint alguna resposta de Stackoverflow he calculat apisig, i aquesta.
-										Intentare aconseguir un codi més entenedor i simple<br>
-		Un cop teniu apisig, podeu fer una crida al getSession per obtenir una sessionKey ( requerida en els metodes que requereixen AUTENTICACIO)
-<br>
-<br>
-		AddTrackTag i trackLove : Son dos metodes que envies informacio ( POST), estan bé segons la documentació pero et retorna error de concertirEnParametres
-							invalids ( com si faltes o sobrés algun parametre). He comunicat a la comunitat a veure si em diuen algo.
-<br>
-<br>
-<br>
-
+<!---------->
 		<button type="button" onclick="loadUserInfoXMLDoc()">Get User information</button>
 		<button type="button" onclick="loadDefaultUserInfoXMLDoc()">Get Default User information (test)</button>
-		<button type="button" onclick="loadSearchArtistJSONDoc()">Search artist</button>
 		<br><br>
 		<button type="button" onclick="loadChartTopArtistsJSONDoc()">Get Top Artist Chart</button>
 		<button type="button" onclick="calculateApiSignature()">Calculate API Signature ( test)</button>
@@ -74,6 +90,49 @@
 		<table id="demo2"></table>
 
 		<p id="artist"></p>
+
+		<!--                                                             footer                                                                      -->
+	<div class="row" style="height: 200px;"></div>
+	</div>
+	<footer class="page-footer font-small unique-color-dark" style="position: fixed; bottom: 0; width:100%;">
+<div class="container text-center text-md-left mt-5" style="background-color: grey;padding-left: 0px;padding-right: 0px;">
+	<div class="row mt-3">
+		<div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4">
+			<h6 class="text-uppercase font-weight-bold">INS Almatà</h6>
+			<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+			<p>Un lloc on creixer presonalment i mentalment. Vine i amb una mica d'esforç, sudor i sang sortiras amb un titol XD</p>
+		</div>
+		<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+			<h6 class="text-uppercase font-weight-bold">Pagina Web</h6>
+			<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+			<p>
+				<a href="http://www.almata.cat/">INS Almatà</a>
+			</p>
+		</div>
+		<div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
+
+			<!-- Links -->
+			<h6 class="text-uppercase font-weight-bold">Contacte</h6>
+			<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+			<p>
+				<i class="fas fa-home mr-3"></i>Balaguer,C/ Pla d’Almatà sn</p>
+			<p>
+				<i class="fas fa-envelope mr-3"></i>iesalmata@xtec.cat</p>
+			<p>
+				<i class="fas fa-phone mr-3"></i> + 34 973 44 56 91</p>
+		</div>
+	</div>
+
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center" style="background-color: black;">© 2019 Copyright:
+	<a href="https://blocs.xtec.cat/almata/institut-almata/politica-de-privadesa/"> INS Almatà</a>
+</div>
+</div>
+<!-- Copyright -->
+
+</footer>
 
 	</body>
 </html>
