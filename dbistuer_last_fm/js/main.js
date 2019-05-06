@@ -2,11 +2,13 @@ var API_KEY="27ec60ec0e2abdbea320f9f93394e807";
 var SHARED_SECRET="6fc2c721a8743addf75d378c6ac451cc";
 var USER='dbistuer'
 
+
 var url = window.location.href; // or window.location.href for current url
 var captured = /token=([^&]+)/.exec(url)[1]; // Value is in [1] ('384' in our case)
 var result = captured ? captured : 'myDefaultValue';
 console.log(captured);
-
+var token = captured;
+sessionStorage.setItem('token',token);
 /*
 Metode: https://www.last.fm/api/show/auth.getSession
 Objective: Fetch a session key for a user. The third step in the authentication process. See the authentication how-to for more information.
@@ -40,7 +42,7 @@ function calculateApiSignatureStack()
           // Set elsewhere but hacked into this example:
         var last_fm_data = {
             'last_token':captured,
-            'user': 'bob',
+            'user': 'dbistuer',
             'secret': SHARED_SECRET
         };
 
@@ -87,7 +89,7 @@ function calculateApiSignatureStack()
 
                   //store session key for further authenticate operations...
                   sessionStorage.setItem("mySessionUser", res.session.name);
-                  sessionStorage.setItem("mySessionKey", res.session.key);
+                  sessionStorage.setItem("sk", res.session.key);
               },
               error : function(xhr, status, error){
                     var errorMessage = xhr.status + ': ' + xhr.statusText

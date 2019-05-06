@@ -125,3 +125,112 @@ function       processarRespostaArtistaPerTag(dades) {
   txt += "</table>";
   document.getElementById("artist").innerHTML = txt;
 }
+
+
+
+
+
+
+
+function  removeTag() {
+  calculateApiSignatureStack();
+  var artista = document.getElementById('artistaRemove').value;
+var track = document.getElementById('trackRemove').value;
+var tag = document.getElementById('tagRemove').value;
+
+var data = {
+       method: 'track.removeTag',
+       artist: artista,
+       track: track,
+       tag: tag,
+       token: sessionStorage.getItem('token'),
+       api_key: API_KEY,
+       sk: sessionStorage.getItem("sk")
+       }
+       var apiSig = last_fm_calculate_apisig(data)
+       data['api_sig']=apiSig;
+  $.ajax({
+
+      type : 'POST',
+      url : 'http://ws.audioscrobbler.com/2.0/?',
+
+      data: data,
+      dataType : 'json',
+      success : function(data) {
+              $('#status').html(data.user.name);
+         },
+      error : function(code, message){
+           $('#error').html('Error Code: ' + code + ', Error Message: ' + message);
+      }
+  });
+}
+
+function last_fm_calculate_apisig(params){
+
+  ss = "";
+        st = [];
+        so = {};
+        so['api_key'] = params['api_key'];
+        so['token'] = params['token'];
+        Object.keys(params).forEach(function(key){
+            st.push(key); // Get list of object keys
+        });
+        st.sort(); // Alphabetise it
+        st.forEach(function(std){
+            ss = ss + std + params[std]; // build string
+        });
+        ss += SHARED_SECRET;
+  return md5(unescape(encodeURIComponent(ss)));
+}
+
+function calculateApiSignatureStack(){
+
+          // Set elsewhere but hacked into this example:
+        var last_fm_data = {
+            'token':captured,
+            'secret': SHARED_SECRET,
+            'api_key': API_KEY
+        };
+
+        // Kick it off.
+        last_fm_call(last_fm_data);
+
+
+        // Low level API call, purely builds a POSTable object and calls it.
+        function last_fm_call(data){
+
+            var API_SIG = last_fm_calculate_apisig(data);
+        /*
+        .*/
+            sessionStorage.setItem('API_SIG', API_SIG);
+            console.log("Post data: Last token " + captured + "ApiKey: "+ API_KEY + "ApiSig: " + API_SIG);
+            //sessionStorage.setItem("myApiSig",post_data.api_sig );
+
+            var last_url='http://ws.audioscrobbler.com/2.0/?method=auth.getSession';
+            $.ajax({
+              type: 'GET',
+              url: last_url,
+              data : 'token='+captured+
+                     '&api_key='+API_KEY+
+                     '&api_sig='+API_SIG,
+              //data: post_data,
+              dataType: 'xml',
+              //"success" gets called when the returned code is a "200" (successfull request). "error" gets called whenever another code is returned (e.g. 404, 500).
+              success: function(res){
+                  //No caldria aquesta instrucció perque ja guaredem els que ens convé en sessionStorage
+                  last_fm_data[method] = res;
+                  //var	myresposta = JSON.parse(res);
+                  console.log("Resposta: Name " + res.session.name);// Should return session key.
+                  console.log("Resposta: Key " + res.session.key);
+
+                  //store session key for further authenticate operations...
+                  sessionStorage.setItem("mySessionUser", res.session.name);
+                  sessionStorage.setItem("sk", res.session.key);
+              },
+              error : function(xhr, status, error){
+                    var errorMessage = xhr.status + ': ' + xhr.statusText
+                    console.log('Error - ' + errorMessage);
+              }
+             });
+        }
+      }
