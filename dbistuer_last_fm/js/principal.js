@@ -1,3 +1,7 @@
+/*Codi per a cercar per artista
+Aquest agafe de la pantalla el nom  de l'artista a cercar
+i la cantitat de registres que es volen trure d'aquest*/
+
 function cercaPerArtista() {
   var artista = document.getElementById('nomArtista').value;
   if (artista==null || artista== ""){
@@ -39,6 +43,10 @@ function processarRespostaArtista(dades) {
   txt += "</table>";
   document.getElementById("artist").innerHTML = txt;
 }
+
+/*Codi per a cercar per album
+Aquest agafe de la pantalla el nom  de l'album a cercar
+i la cantitat de registres que es volen trure d'aquest*/
 
 function cercaPerAlbum() {
   var album = document.getElementById('nomAlbum').value;
