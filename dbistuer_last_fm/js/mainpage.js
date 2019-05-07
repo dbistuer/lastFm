@@ -133,7 +133,7 @@ function       processarRespostaArtistaPerTag(dades) {
 
 
 function  removeTag() {
-  calculateApiSignatureStack();
+  //calculateApiSignatureStack();
   var artista = document.getElementById('artistaRemove').value;
 var track = document.getElementById('trackRemove').value;
 var tag = document.getElementById('tagRemove').value;
@@ -145,18 +145,19 @@ var data = {
        tag: tag,
        token: sessionStorage.getItem('token'),
        api_key: API_KEY,
-       sk: sessionStorage.getItem("sk")
+       sk: sessionStorage.getItem('sk')
        }
        var apiSig = last_fm_calculate_apisig(data)
        data['api_sig']=apiSig;
   $.ajax({
 
       type : 'POST',
-      url : 'http://ws.audioscrobbler.com/2.0/?',
+      url : 'http://ws.audioscrobbler.com/2.0/',
 
       data: data,
       dataType : 'json',
       success : function(data) {
+          alert(data);
               $('#status').html(data.user.name);
          },
       error : function(code, message){
@@ -186,11 +187,10 @@ function last_fm_calculate_apisig(params){
 function calculateApiSignatureStack(){
 
           // Set elsewhere but hacked into this example:
-        var last_fm_data = {
-            'token':captured,
-            'secret': SHARED_SECRET,
-            'api_key': API_KEY
-        };
+          var data = {
+              'token':sessionStorage.getItem('token'),
+              'api_key': API_KEY
+          };
 
         // Kick it off.
         last_fm_call(last_fm_data);

@@ -96,6 +96,7 @@ function calculateApiSignatureStack()
                     console.log('Error - ' + errorMessage);
               }
              });
+             //getuserinfo
         }
 
         function last_fm_calculate_apisig(params){
