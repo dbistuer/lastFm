@@ -71,27 +71,54 @@
 						<h3>Remove tag track</h3>
 					</div>
 					<div class="col-sm-12 col-md-4">
-						<div class="input-group">
+						<div class="input-group form-group has-error">
 							<span class="input-group-addon">Artista que li vols eliminar el tag: </span>
 							<input type="text" class="form-control" placeholder="ex: Bruno Mars" id="artistaRemove">
 						</div>
 						</div>
 					<div class="col-sm-12 col-md-4">
-						<div class="input-group">
+						<div class="input-group form-group has-error">
 							<span class="input-group-addon">Canço a la que li vols eliminar el tag: </span>
 							<input type="text" class="form-control" placeholder="ex: Greanade" id="trackRemove">
 						</div>
 						</div>
 						<div class="col-sm-12 col-md-4">
-							<div class="input-group">
+							<div class="input-group form-group has-error">
 							<span class="input-group-addon">Tag a eliminar:</span>
 							<input type="text" class="form-control" placeholder="ex: Reagge" id="tagRemove">
 							<span class="input-group-btn">
-								<button class="btn btn-danger" type="button"onclick="removeTag()">Eliminar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								<button class="btn btn-danger" type="button"onclick="removeTag()">Eliminar <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 							</span>
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>Afegir tag track</h3>
+					</div>
+					<div class="col-sm-12 col-md-4">
+						<div class="input-group form-group has-success">
+							<span class="input-group-addon">Artista que li vols afegir el tag: </span>
+							<input type="text" class="form-control" placeholder="ex: Bruno Mars" id="artistaAdd">
+						</div>
+						</div>
+					<div class="col-sm-12 col-md-4">
+						<div class="input-group form-group has-success">
+							<span class="input-group-addon">Canço a la que li vols afegir el tag: </span>
+							<input type="text" class="form-control" placeholder="ex: Greanade" id="trackAdd">
+						</div>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="input-group form-group has-success">
+							<span class="input-group-addon has-success">Tag a afegir:</span>
+							<input type="text" class="form-control" placeholder="ex: Reagge" id="tagAdd">
+							<span class="input-group-btn">
+								<button class="btn btn-success" type="button"onclick="trackAddTag()">Afegir <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+							</span>
+						</div>
+					</div>
+				</div>
+
 		<div id=""
 		<div id="userData">	</div>
 		<div id="success">
@@ -116,9 +143,9 @@
 		<table id="demo2"></table>
 
 		<p id="artist"></p>
-
+	<hr />
 		<!--                                                             footer                                                                      -->
-	<div class="row" style="height: 200px;"></div>
+	<div class="row" style="height: 300px;"></div>
 	</div>
 	<footer class="page-footer font-small unique-color-dark" style="position: fixed; bottom: 0; width:100%;">
 <div class="container text-center text-md-left mt-5" style="background-color: grey;padding-left: 0px;padding-right: 0px;">
