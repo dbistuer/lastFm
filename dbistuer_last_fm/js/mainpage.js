@@ -127,13 +127,47 @@ function       processarRespostaArtistaPerTag(dades) {
 }
 
 
+function  trackAddTag() {
+  //calculateApiSignatureStack();
+  var artista = document.getElementById('artistaAdd').value;
+var track = document.getElementById('trackAdd').value;
+var tag = document.getElementById('tagAdd').value;
 
+var data = {
+       method: 'track.addTags',
+       artist: artista,
+       track: track,
+       tag: tag,
+       token: sessionStorage.getItem('token'),
+       api_key: API_KEY,
+       sk: sessionStorage.getItem('sk')
+       }
+       var apiSig = last_fm_calculate_apisig(data)
+       data['api_sig']=apiSig;
+  $.ajax({
+
+      type : 'POST',
+      url : 'http://ws.audioscrobbler.com/2.0/',
+
+      data: data,
+      dataType : 'xml',
+      success : function(data) {
+
+          alert('S\'HA AFEGIT EL TAG CORRECTAMENT '+data.getElementsByTagName('lfm')[0].outerHTML)
+            //  $('#status').html(data.getElementsByTagName('lfm')[0].outerHTML);
+         },
+      error : function(code, message){
+        alert('error');
+           $('#error').html('Error Code: ' + code + ', Error Message: ' + message);
+      }
+  });
+}
 
 
 
 
 function  removeTag() {
-  calculateApiSignatureStack();
+  //calculateApiSignatureStack();
   var artista = document.getElementById('artistaRemove').value;
 var track = document.getElementById('trackRemove').value;
 var tag = document.getElementById('tagRemove').value;
@@ -145,19 +179,20 @@ var data = {
        tag: tag,
        token: sessionStorage.getItem('token'),
        api_key: API_KEY,
-       sk: sessionStorage.getItem("sk")
+       sk: sessionStorage.getItem('sk')
        }
        var apiSig = last_fm_calculate_apisig(data)
        data['api_sig']=apiSig;
   $.ajax({
 
       type : 'POST',
-      url : 'http://ws.audioscrobbler.com/2.0/?',
+      url : 'http://ws.audioscrobbler.com/2.0/',
 
       data: data,
-      dataType : 'json',
+      dataType : 'xml',
       success : function(data) {
-              $('#status').html(data.user.name);
+          alert('S\'HA ELIMINAT EL TAG CORRECTAMENT '+data.getElementsByTagName('lfm')[0].outerHTML)
+              //$('#status').html(data.getElementsByTagName('lfm')[0].outerHTML);
          },
       error : function(code, message){
            $('#error').html('Error Code: ' + code + ', Error Message: ' + message);
@@ -186,11 +221,10 @@ function last_fm_calculate_apisig(params){
 function calculateApiSignatureStack(){
 
           // Set elsewhere but hacked into this example:
-        var last_fm_data = {
-            'token':captured,
-            'secret': SHARED_SECRET,
-            'api_key': API_KEY
-        };
+          var data = {
+              'token':sessionStorage.getItem('token'),
+              'api_key': API_KEY
+          };
 
         // Kick it off.
         last_fm_call(last_fm_data);

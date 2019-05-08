@@ -1,4 +1,3 @@
-
 		var myapplication_name="dbistuer_last_fm";
 		var API_KEY="27ec60ec0e2abdbea320f9f93394e807";
 		var SHARED_SECRET="6fc2c721a8743addf75d378c6ac451cc";
@@ -12,4 +11,6 @@ function myLoginFunction(){
 			sessionStorage.setItem('API_KEY',API_KEY);
 			sessionStorage.setItem('SHARED_SECRET',SHARED_SECRET);
 			window.location.replace(url);
+
+
 }
