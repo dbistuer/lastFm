@@ -191,8 +191,10 @@ var data = {
       data: data,
       dataType : 'xml',
       success : function(data) {
+
           alert('S\'HA ELIMINAT EL TAG CORRECTAMENT '+data.getElementsByTagName('lfm')[0].outerHTML)
               //$('#status').html(data.getElementsByTagName('lfm')[0].outerHTML);
+
          },
       error : function(code, message){
            $('#error').html('Error Code: ' + code + ', Error Message: ' + message);
